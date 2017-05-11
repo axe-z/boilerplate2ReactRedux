@@ -1,0 +1,321 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>React the nex chapter</title><link rel="icon" type="image/png" href="favicon.png"><link href="app.css?e94884c1a417b1c5855e" rel="stylesheet"></head><body><div id="app"></div><div class="notes"><h1>App Modern React with redux</h1><h3>Avant tout: GITHUB</h3><div class="section"><h2>GIT</h2><li>VOIR LES VIDEOS DANS THE COMPLETE REACT WEB APP COURSE VIDEO 40 A 45</li><li>Pour installer git, dans le folder du project, taper git init dans le terminal , un fichier sera creer, qu on voit pas</li><li>git status, permet de voir ou en est le git, et au depart aucun fichier n'est surveille, on ne veut seulement pas node-moudle</li><li>.gitignore que l on doit creer au root, et y mettre ce qu'on ne veut pas tracker : .DS_Store , bs-config.json et node_modules/</li><li>Si on relance git status, ceux ci ne sont plus present</li><li>Maintenant pour faire un commit, on tape: git add .gitignore pour ajouter a la liste verte se fichier.</li><li>Maintenant pour eviter d avoir a tout taper, on peut seulement taper : GIT ADD . avec le point, on ajoute tous les fichier non-black listé par le git ignore. refaire git status pour voir</li><li>Tout est maintenant vert.Mais rien a raiment savé</li><li>Maintenant pour sauvegarder : en minuscule: GIT COMMIT -m 'Commit Initial' , dans le string, on met simplement un description, si mose ajour , bug reparation, ou peu importe.</li><li>la liste des fichiers sera a l ecran , refaire git status et la liste des fichier modifiers depuis y sera, icil index a changer parce que je tappe, et celui, le index fait par webpack aussi...</li><li>Donc chaque fois qu on touche un fichier, il s ajoutera a la liste pas updatees rouge.</li><li>on pourrait rfaire les memes etapes, mais : GIT COMMIT -A -M 'UPDATE' , ici j'ai eu a identifier l ordi.</li><li>Si un fichier est ajouté, on doit cependant l ajouter avec git add .</li><li>j ai fait un readme, donc je doit refaire git add .</li><br><br><br><pre> <code>
+Dans .gitignore: juste mettre ca, que ce texte
+
+.DS_Store
+bs-config.json
+node_modules/
+
+   </code>  </pre><h2>Dans Github</h2><li>compte axe-z, on doit dnas les settings alleer activer sa cle SSH, ce qui permet d associer les data et le compte.</li><li>pour ne pas a avoir a taper, nom et password a chaque push, la cle est importante.</li><li>pour se rendre a sa cle sur son ordi, dans le termianl tapper: ls -al ~/.ssh</li><li>id_rsa , est la cle privee.</li><li>id_rsa.pub est la cle public pour le git hub.</li><li>ajouter a son keychain d ordi, la cle git hub: une fois fait (voir videos)</li><li>faire refresh sur git hub, et creer un repo</li><h2>pousser le data la bas</h2><li>git remote add origin https://github.com/axe-z/ReactStuff.git</li><li>ensuite voir si ca fonctionne, y aura pas de confirmation : git remote -v</li><li>edux lien arrivent , un fetch et un push</li><li>origin https://github.com/axe-z/ReactStuff.git (fetch) origin https://github.com/axe-z/ReactStuff.git (push)</li><li>git branch sit si on est sur le master</li><h3>une fois setter</h3><li>seulement faire un : git commit -a -m 'ajout copy'</li><li>une fois fait pour pusher au serveur: git push et c'est fait</li></div><br><br><br><br><br><br><br><div class="section"><h2>Comment ajouter un projet a git</h2><li>arreter webpack</li><li>lancer git init</li><li>lancer git status, pour voir tous les fichier inclut (optionnel)</li><li>lancer git add .</li><li>lancer git commit -a -m 'Initial commit'</li><li>Se rendre sur le site de github pour creer un nouveau repo</li><li>A la page du quick setup, et on veut l option qui push du command line: on copy et paste : git remote add origin https://github.com/axe-z/nomdutruc.git git push -u origin master</li><li>Une fois fait, il s agit seulement de rafraichir la page et le repo devrait maintenant est rempli de mes fichiers.</li><li>fin</li><pre><code>
+
+   partir le projet
+     git init
+     git status (optionel, montre les fichiers qui vont etre ajoutes)
+     git add .
+     git commit -a -m 'Initial commit'
+     faire son repo, sur github, et copy pace les deux lignes
+     git remote add origin https://github.com/axe-z/nomdutruc.git
+     git push -u origin master
+
+     the end.
+
+      pour updater son projet
+      dans l ordre :
+
+      git status
+      git add .     //si nouveau fichier
+      git status
+      git commit -am 'message'
+      git push
+
+
+      pour partir du boilerplate sur git,
+
+      dans le terminal et etre sur le desktop, le vrai terminal aussi, hors projet,
+      faire: git clone https://github.com/axe-z/boilerplateReact.git  (on va chercher le lien clone sur github )
+
+     ca va faire un rep et amener les fichiers,
+
+    </code></pre></div><div class="section"><h2>Pour etre sur d'etre deconnecte de git et heroku, si on reste dnas le meme folder, pour un autre projet.</h2><li>Dans la console, on peut faire rm -rf ./.git/</li><li>Sinon manuellement deleter le rep dans le tree du projet</li><pre><code>
+     pour deleter le git, quand on a fini et on veut en partir un autre
+       rm -rf ./.git/
+
+    </code></pre></div><div class="section"><h2>Comment ajouter un projet heroku ( si compte ouvert )</h2><li>Ca se fait dans le termianl sans avoir a aller sur le site de heroku</li><li>D abord lancer heroku create</li><li>pour verifier si ca fonctionne et qu il a ete chercher la bonne chose sur git: git remote -v</li><li>ensuite pour envoyer : git push heroku master</li><li>il ne reste qu a lancer heroku (attendre 10 sec): heroku open</li><pre><code>
+
+  donc :
+  heroku create
+   git remote -v
+  git push heroku master
+  heroku open
+
+  </code></pre></div><div class="section"><h2>Heroku pour la premiere fois</h2><li>Une fois l installer fait, dans le terminal , lancer heroku</li><li>pour savoir qui est loguer: heroku auth:whoami</li><li>tout est installé.</li><li>heroku doit lancer notre site/app, dela meme maniere que nous... avec un script dans npm..</li><li>on doit faire un script qui s appele START, avec un port process.env.PORT , voir server.js</li><li>heroku create , va creer une place pour l app</li><li>de git a heroku : git push heroku master</li><li>heroku open , va ouvrir le site</li><li>fin</li><pre><code>
+
+
+pour updater son projet
+dans l ordre :
+
+git status
+git add .     //si nouveau fichier
+git status
+git commit -am 'message'
+git push
+git push heroku master ///attendre 10 sec apres.
+heroku open
+
+  </code></pre></div><div class="section"><h2></h2><li></li><pre><code>
+
+  </code></pre></div><!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--><h1>PLURALSIGHT</h1><div class="section"><h2>React-redux</h2><li>oublions CreateClass</li><pre><code>
+stateless FTW , prend seulement les props, qui sont fixes, immutable
+const stateless = (props) => {
+  return (
+      h1 Allo Monde /h1
+  )
+}
+     ///stateless ///// a utiliser des que possible
+     1-oublie le this, y en a pas.
+     2. ca joue avec les props qu on y passe
+     3. donc pas de bind, parfait sur component de presentation.
+     5. moins bloated
+     6. plus facile a comprendre
+     7. pur function
+     8 facile a tester
+     9. plus performant
+     10. pas de lifecycle, force a mettre les chose dans redux.
+
+
+     //Class a utiliser quand:
+     1.t as besoin de ref , state ou lifecycles.
+     4. va bien avec REDUX
+
+  </code></pre></div><div class="section"><h2>Apres avoir monter le set up React, enfin redux.</h2><h3>Si tu ne sais pas si t as besoin de redux dans ton app, t en as pas de besoin ...</h3><h3>Si du data, est utlise a plusieurs place dnas un site et que ce data doit etre sync, t as besoin de Redux</h3><ol><li>les trois principes de Redux:</li><li>Une seul immutable STORE</li><li>Seul maniere de modifier le STATE, est par une action</li><li>Le state est seulement changé par une function pure, un REDUCER</li></ol><li>Avec redux, comme React, le data va par en bas, meme chose pour flux. actions goes up!</li><li>On travaille jamais sur le vrai data, immutable le store comme on disait. avec getState, on voit la transformation d une copie du data.</li></div><div class="section"><h2>Action creator direct</h2><li>les action creator, sont une fn, qui retourne un action, la fn prend le meme nom que le type pour etre sur s y retourver.</li><li>payload peut se nommer n importe quoi, mais avoir un nom unifier, je trouve ca plus simple.</li><pre><code>
+ const addError = (message) =>
+       ({
+       	  type:  'ADD_ERROR',
+       	  payload: message
+       })
+  </code></pre></div><div class="section"><h2>Create store</h2><li>1 seul store, tu peux rien changer dans le store directement, seulement des actions vont modifier</li><pre><code>
+const store = storeFactory(initialState);
+sinon let store = createStore(reducerCombines)
+
+// storeFactory est une fonction de conveniance qu on creer, qui fait une belle job a retourner les changement aussi.
+//inistate est la forme du data stringifie
+
+
+//storeFactory
+  </code></pre></div><div class="section"><h2>Immutability</h2><li>le store change pas, on fait juste ressortir un nouvel object, qui est un copie de ce qui est dans le store, et on le fait avec les actions et le reducer creer l objet change.</li><li>il parle de Object.assign, mais y a plus simple</li><pre><code>
+    Object.assign(target, ...sourceDeDepart)
+
+    Object.assign({}, state, {role: 'admin'});
+
+  </code></pre></div><div class="section"><h2>export default connect(mapStateToProps, mapDispatchToProps)</h2><li>Ces deux functions, n ont rien de magique et pourrait s appeler autre chose, redux les nomme ainsi, mais il sont variables.</li><li>quand on met pas mapDispatchToProps en deuxieme argument, connect donne acces a this.props.dispatch ce qui permet de lancer des actions dans le component</li><pre><code>
+    ///export default CoursesPage
+    ///export default CoursesPage
+    //au lieu d exporter CoursesPage normalement, on va le wrapper dans connect
+    //connect retourne une function, de la la drole de sytaxe
+    function mapStateToProps(state, ownProps){    //ownProps est les props du component de react
+      return {
+        courses: state.courses     //ca c 'est le reducer courseReducer, qu on a renomé courses
+      }
+    }
+    //au lieu de faire ca dans la fn du onClickSave
+    //!!IMPORTANT , du moment ou l on utilise mapDispatchToProps, dispatch n'est plus disponnible DANS react. Il l'est seulement, quand on ne met pas le deuxieme argument a connect.
+     function mapDispatchToProps(dispatch){   ///optionel
+       return  {
+        // createCourse: (course) => dispatch(courseActions.createCourse(course)) //maniere clair
+           actions: bindActionCreators(courseActions, dispatch) //parfait quand plusieurs actions dispo
+       }
+     }
+                  //deux call d actions, connect retourne une function qui demande le component (CoursesPage)
+    export default connect(mapStateToProps , mapDispatchToProps )(CoursesPage) //pour linker avec le store
+    //quand on met pas mapDispatchToProps en deuxieme argument, connect donne acces a this.props.dispatch
+    //ce qui permet de lancer des actions dans le component
+
+
+  mapStateToProps(state, [ownProps]): stateProps] (Function): If this argument is specified, the new component will subscribe to Redux store updates. This means that any time the store is updated, mapStateToProps will be called. The results of mapStateToProps must be a plain object*, which will be merged into the component’s props. If you don't want to subscribe to store updates, pass null or undefined in place of mapStateToProps
+  </code></pre></div><div class="section"><h2>Les pros font un fichier de constants</h2><li>actionTypes.js , on y met tout nos actions string, pour pas faire de fautes de frappes... mais bon ..les message d erreure servent a ca..</li><pre><code>
+
+  </code></pre></div><div class="section"><h2>Reducers</h2><li>l histoire d un app se voit dans les reducers, il y aura moins de reducer que d action, parce qu on peut utiliser des petit reducer, dans de plus grand reducer, pour faire une composition.</li></div><div class="section"><h2>Connecter React et Redux</h2><li>Redux est la pour feeder les components de React qui sont des container, pas ceux de presentation</li><li>Les container de react, son subscriber au changement de state de redux, les components de react qui sont dumb/de presentation, eux ne font que recevoir le data par des props</li><li>Le gros de la job dans les components de containers est fait par react redux. Ce qui se passe sur les dumb, est vraiment notre code seulement.</li><h3>react-redux : les methodes de connections</h3><ol><li>le Provider: donne a l'app react le data du store de redux</li><li>Connect : Creer des container components dans react, en donnant acces a react dans le components</li></ol><p>VS flux, qui se connect au store dans les lifecycle, et demande a chaque component bcp de code pour la connection a componentwillmount et deconnection a unmount. Donc pas possible d avoir du statelesscompponent qui n ont pas de lifecycles.</p><pre><code>
+
+   ///PROVIDER donne accesau data du store a tes components,
+   ///le passant a ton top level components, les autres on acces :
+
+   Provider store={this.props.store}
+     Apps  //va donner a router router va donner a lautre ainsi de suite
+   /Provider
+
+   //CONNECT wrap les components pour les connecter au store, et donne seulement ce que necessaire au component
+   export default connect(
+     mapLeStateAuxProps
+     mapDispatchAuProps
+   )(AboutPage)
+
+    Dans une app tres simple
+   //si connect(mapLeStateAuxProps, mapDispatchAuProps)
+
+   function mapLeStateAuxProps(state){
+     return {
+       appState: state
+     }
+   }
+   //DONC DANS LE COMPONENT, AVEC THIS.APPSTATE.PROPS, J AI ACCES A TOUT MON STORE. MAIS ON PEUT DIVISER, ET PAS TOUT DONNER, POUR AMELIORER LA VITESSE.
+
+  ///bindActionCreators , est une methode DE REDUX
+   //connect(mapLeStateAuxProps, mapDispatchAuProps)
+
+   function mapDispatchAuProps(dispatch){
+     return {
+       actions: bindActionCreators(actions, dispatch)
+     }
+   }
+
+  //NOUS DONNE ACCES A NOS ACTIONS CREATOR QU ON A DANS REDUX
+
+  aussi connect nous donne aces a dispatch , on peut directement appeler nos actions ou actionsCreator dans REact
+  avec :
+
+  this.props.dispatch(nomDeNotreActionCreator())
+  mais ca chi un peu pour les child components
+
+  </code></pre><h4>Si y a des functions qu on fait souvent, il y a un npm (reselect librairy) qui permet de faire du MEMOIZE, pas de faute ici, et qui cache les call de function et les reponses.</h4><div class="imagesReact"></div></div><div class="section"><h2>REDUX_DEVTOOLS_EXTENSION</h2><li>On doit retirer dans le redux-compose, window.__REDUX_DEVTOOLS_EXTENSION_ qui lui ne fonctionne que dans chrome bien sur et que l' utilisateur n a pas de besoin.</li><pre><code>
+    //erreur dans les autres browsers.
+
+    const configureStore = (initialState) => {
+       return redux.createStore(rootReducer, initialState,  compose(
+        applyMiddleware(thunk),
+        applyMiddleware(reduxImmutableStateInvariant()),
+     //  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  //pourdevtool
+       ))};
+  </code></pre></div><div class="section"><h2>Se faire un faux api, pour gerer le data</h2><li>Se faire un mock api pour tester nos action async, si notre app depend d un api externe, on peut sans avoir a inclure l api, juste a sachant ce que le vrai api retourne, creer un fake avec le meme input.</li><li>ca nous donne l independance, surtout si un autre personne s occupe de de se module.</li><li>et les reponses sont plus vite. Mais il est bon d y mettre une maniere dans le faux api de ralentir le data, pour voir ce qui arrive si l api, le service est pas bon/vite avec setTimeout.</li><li>plus facile a tester</li><pre><code>
+
+  </code></pre></div><div class="section"><h2>Async avec React-Redux avec thunk</h2><li>thunk retourne un fn, dur a tester, plus simple</li><li>saga retourne un generator avec des yields, facile a tester, plus tuff facile a bugger</li><pre><code>
+  les trois middleware les plus populaires:
+  -redux-thunk  -- permet de retourner des fn au lieu d objets
+  //redux-promise   --fonctionne avec des promises
+  //redux-saga   --fonctionne avec des generators de es6 et est le plus perfo. impressionnant
+
+//un thunk
+function deleteTest(testId){
+ return (dispatch) => {
+   return testApi.deleteTest(testId)
+    .then(() => {
+      dispatch(deleteTest(testId))
+    })
+    .catch(handleErrors)
+ }}
+
+//OU
+
+export const suggestResortNames = (value) => {
+  return  (dispatch, /*getState*/) => {
+    dispatch({
+      type: C.FETCH_RESORT_NAMES
+    })
+fetch('http://localhost:3000/resorts/' + value)
+   .then( response => response.json() )
+   .then( data => {
+     dispatch({
+       type: C.CHANGE_SUGGESTIONS,
+       payload: data
+     })
+   })
+  .catch(err  => {
+    dispatch(
+      addError(err.message)
+    )})}}
+  </code></pre></div><!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   video 84, j ai arretté, ca devenait long et fastidieux, trop de fichiers data encore dans folder du cours.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--><div class="section"><h2>Un peu d'histoire</h2><li>redux est une variante de flux, que facebook a fait, une des nombreuses, mais la plus utilisee maintenant, pourf sa 'simplicite' ..</li><li>garde le meme flo de data qui va d un bord, de user a action, action a dispatcher, dispatcher a store et store , qui a le data, a view.</li><li>on dit que redux n a qu une seul store de dispo.</li><li>pur function, immutability et composition sont de mise, composition est de qu une function retourne unfontion qui nous donne la reponse a un certaint point.</li></div><div class="section"><h2>Wireframming, l importance de mapper ce qu'on va faire</h2><li>Il est impensable de winguer une app, il faut savoir d avance ce que l on veut construire.</li><li>donc de simple dessins feront le boulot, mais il faut faire le boulot avant.</li><li>avec Redux, on ne regarde pas les elements a construire, mais les actions que ces elements vont faire</li><li>Dans une app qui gere une station de ski et des vacance, on regarde pour Add_day, remove_day, set_goal,add_error,. clear_error,</li><li>il est une bonne idee de se creer un fichiers des actions qu on devra faire, et grounder les nom au depart, comme ca intellisense va nous les popper, ca evite les erreurs</li><li>on va avec le fichier initialState, se faire du data demo</li><pre><code>
+     ///Object.keys est maintenant Object..values , et pour tout avoir, la key et value, Object.entries
+
+  </code></pre></div><div class="section"><h2>Le reducer et action</h2><li>le reducer fait ce qu il veut retourne arr, obj, string, dans la mesure ou il ne touche pas au state, dans le sens ou le state est immutable.</li><li>J avais l impression qu il devait toujours retourner un obj. c'est faux.</li><pre><code>
+
+  </code></pre></div><div class="section"><h2>Chose serieuse , creer le store</h2><li>il faut finalement Redux, le combine des reducers, et le data</li><pre><code>
+    import C from './redux/constants'
+    import appReducer from './store/reducers'
+    import initialState from './redux/initialState.json'
+
+    import { createStore } from 'redux' ///on a besoin de creer un store.
+
+
+    const store = createStore(appReducer, initialState) //ajouter initialState, va mettre du data au depart
+
+    console.log('Initial State', store.getState())  // va chercher les valeurs de depart sur le reducer, state est a 10
+    // le reste est vide, dnas les format voulu, array, obj , booleans.
+    // Object {allSkiDays: Array(0), goal: 10, errors: Array(0), resortNames: Object} //sans initialState
+    //Object {allSkiDays: Array(3), goal: 10, errors: Array(0), resortNames: Object}  //avec initialState
+
+    store.dispatch({    //store enmagasine donc le depart et regarde les changements,
+      type: C.SET_GOAL,
+      payload: 2
+    })
+
+    store.dispatch({
+      type: C.ADD_DAY,
+      payload:  {
+          "resort": "Tremblant",
+          "date": "2016-12-18",
+          "powder": false,
+          "backcountry": true
+        }
+    })
+console.log('Next State', store.getState())
+//Next State Object {allSkiDays: Array(1), goal: 2, errors: Array(0), resortNames: Object} //sans initialState
+//Object {allSkiDays: Array(4), goal: 2, errors: Array(0), resortNames: Object} //avec initialState
+// y a un array de allskidays, et goal est maintenant a 2
+  </code></pre></div><div class="section"><h2>Donc la mecanique</h2><li></li><pre><code>
+    1. le store gere le DATA
+    const store = createStore(appReducer, initialState) //ajouter initialState, va mettre du data au deparrt
+
+    2. le store, recoit le data ET les reducers, qu on devrait combiner , avec combine
+    export default combineReducers({
+      allSkiDays,  goal,  errors,
+      resortNames: combineReducers({  fetching,  suggestions  })  })
+
+   3. Maintenant les actions se passe par un dispatch du store, dispatch prend un obj avec type et la nouvelle valeur
+
+   4.Anatomy du reducer : fn qui prend un STATE, et une action.
+   4a - le state, est le type de recepteur qu on doit avoir, [] pour un array, etc..
+   4b - on regarde avec un switch, si l action, le type est celui que le store dispatch.
+   4c. Retourne un nouvel etat.
+  </code></pre></div><div class="section"><h2>Subscribe</h2><li>il est possible de faire plusieurs subscribe, et meme par exemple en faire un qui s occupe d'envoyer le data a localStorage:</li><pre><code>
+    //peux etre fait seulement si une fois passer le data ... un peu complex...
+    const initial = (localStorage['redux-store']) ? JSON.parse(localStorage.getItem('redux-store')) : {};
+
+    const store = createStore(appReducer, initial )
+
+    ///mettre le data dans localStorage
+    let unsubscribe =  store.subscribe(() => {
+        const state = JSON.stringify(store.getState())
+        localStorage['redux-store'] = state;  //localStore.clear() garde la shape enleve les QTE
+        console.log('Changement', store.getState())
+      });
+  //ET reconstruire le tout apres.
+  console.log('Voila', JSON.parse(localStorage.getItem('redux-store')))
+
+//subscribe retourne unsubscribe, donc on peut le mettre comme container.
+
+  </code></pre></div><div class="section"><h2>Middleware thunk</h2><li>GARDER index.js, ensuite faitre des actions cools</li><pre><code>
+    //thunk action parce que un thunk est un higher ordered func, et on a acces a dispatch eux, on peut faire des truc ASYNC, en plus ils on getState, qui permet de regarder si le data est si ou ca,
+    export const randomGoals = () => {
+      return (dispatch, getState) => {
+
+    if(!getState().resortNames.fetching){
+       dispatch({
+         type: C.FETCH_RESORT_NAMES
+       })
+        setTimeout(function (){
+          dispatch({
+            type: C.CANCEL_FETCHING
+          })
+        },2000)
+      }
+
+    }
+    }
+  </code></pre></div><div class="section"><h2>FETCH</h2><li></li><pre><code>
+import fetch from 'isomorphic-fetch'
+et npm install --save  isomorphic-fetch
+
+fetch('http://localhost:3000/resorts/' + value)
+   .then( response => response.json() )
+   .then(data )
+  </code></pre></div></div><!--fin--><script type="text/javascript" src="app.js?e94884c1a417b1c5855e"></script></body></html>
